@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+/* ===== MNC CORPORATE THEME ===== */
+
+:root {
+  --background: #f5f7fa;
+  --foreground: #0b1f33;
+
+  --primary: #0a66c2;       /* corporate blue */
+  --secondary: #1f3a5f;     /* dark navy */
+  --accent: #4f8cff;        /* light blue */
+  --muted: #6b7280;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+}
+
+/* Smooth scrolling like modern websites */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Headings */
+/* h1, h2, h3, h4 {
+  color: var(--secondary);
+  font-weight: 700;
+} */
+
+/* Paragraph */
+/* p {
+  color: #4b5563;
+  line-height: 1.7;
+} */
+
+/* Custom container spacing like MNC sites */
+.container-mnc {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
+}
