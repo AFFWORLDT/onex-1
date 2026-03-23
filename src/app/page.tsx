@@ -15,7 +15,20 @@ import OneXPropertiesHero from "@/pages/projects/OneXPropertiesHero";
 import AboutOnex from "@/pages/projects/AboutOnex";
 import PeopleSection from "@/pages/projects/PeopleSection";
 import OnexEntertainment from "@/pages/projects/OnexEntertainment";
-
+import RealEstateServiceSlide from "@/pages/academy/RealEstateServiceSlide";
+import AnalysisServices from "@/pages/academy/AnalysisServices";
+import VocaTechSlide from "@/pages/academy/VocaTechSlide";
+import VocatechAbout from "@/pages/properties/VocatechAbout";
+import SevenSeasHero from "@/pages/properties/SevenSeasHero";
+import HotelShowcase from "@/pages/properties/HotelShowcase";
+import RealEstateTokenization from "@/pages/services/RealEstateTokenization";
+import BPTXMarketplace from "@/pages/services/BPTXMarketplace"
+import HomeXSlide from "@/pages/services/HomeXSlide";
+import OneXFoundation from "@/pages/foundation/OneXFoundation";
+import CSRShowcase from "@/pages/foundation/CSRShowcase";
+import SocialAwardsSection from "@/pages/foundation/SocialAwardsSection";
+import AwardsGrid from "@/pages/contact/AwardsGrid";
+import KeyHighlights from "@/pages/contact/KeyHighlights";
 export default function Home() {
   return (
    <>
@@ -46,11 +59,32 @@ export default function Home() {
   <PeopleSection/>
   <OnexEntertainment/>
 </section>
-<section id="academy">Academy</section>
-<section id="properties">Properties</section>
-<section id="services">Services</section>
-<section id="foundation">Foundation</section>
-<section id="contact">Contact</section>
+<section id="academy">
+  <RealEstateServiceSlide/>
+  <AnalysisServices/>
+  <VocaTechSlide/>
+  
+</section>
+<section id="properties">
+  <VocatechAbout/>
+  <SevenSeasHero/>
+  <HotelShowcase/>
+</section>
+<section id="services">
+  <RealEstateTokenization/>
+  <BPTXMarketplace/>
+  <HomeXSlide/>
+</section>
+<section id="foundation">
+  <OneXFoundation/>
+  <CSRShowcase/>
+  <SocialAwardsSection/>
+</section>
+<section id="contact">
+  <AwardsGrid/>
+  <KeyHighlights/>
+   <OneXEmpireHero/>
+</section>
     </main>
    </>
   );
