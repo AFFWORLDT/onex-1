@@ -1,4 +1,4 @@
-import SmoothScroll from "@/component/SmoothScroll";
+
 
 import BPTXMarketplace from "@/pages/services/BPTXMarketplace";
 import HomeXSlide from "@/pages/services/HomeXSlide";
@@ -8,11 +8,11 @@ export default function ServicesPage() {
   
   return (
     <>
-    <SmoothScroll >
+   
        <RealEstateTokenization/>,
   <BPTXMarketplace/>,
   <HomeXSlide/>
-      </SmoothScroll>
+      
     </>   
   );
 }

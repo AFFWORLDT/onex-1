@@ -1,4 +1,4 @@
-import SmoothScroll from "@/component/SmoothScroll";
+
 import GlobalReach from "@/pages/verticals/GlobalReach";
 import OnexDevelopment from "@/pages/verticals/OnexDevelopment";
 import ProjectsInCanada from "@/pages/verticals/ProjectsInCanada";
@@ -11,14 +11,14 @@ export default function VerticalsPage() {
  
   return (
     <> 
-    <SmoothScroll>
+   
        <GlobalReach />
   <OnexDevelopment />
   <WhyOnexDevelopments />
   <ProjectsInCanada />
   <ProjectsInIndia />
   <ProjectUAE />
-    </SmoothScroll>
+    
    
     </>
   );

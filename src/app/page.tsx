@@ -29,8 +29,8 @@ import CSRShowcase from "@/pages/foundation/CSRShowcase";
 import SocialAwardsSection from "@/pages/foundation/SocialAwardsSection";
 import AwardsGrid from "@/pages/contact/AwardsGrid";
 import KeyHighlights from "@/pages/contact/KeyHighlights";
-import ScrollReveal from "@/component/SmoothScroll";
-import StackedScroll from "@/component/StackedScroll";
+
+
 
 
 export default function Home() {

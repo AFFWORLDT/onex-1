@@ -1,4 +1,4 @@
-import SmoothScroll from "@/component/SmoothScroll";
+
 
 import AboutOnex from "@/pages/projects/AboutOnex";
 import OneXCourses from "@/pages/projects/OneXCourses";
@@ -11,14 +11,14 @@ export default function ProjectPage() {
 
   return (
     <>
-     <SmoothScroll >
+     
         <OneXPresentation/>
   <OneXCourses/>
   <OneXPropertiesHero/>
   <AboutOnex/>
   <PeopleSection/>
   <OnexEntertainment/>
-      </SmoothScroll >
+     
     </>
   );
 }
