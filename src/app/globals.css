@@ -1,43 +1,37 @@
 @import "tailwindcss";
 
 /* ===== MNC CORPORATE THEME ===== */
-/* clipPath: "circle(80% at 120% 50%)" */
+
 :root {
   --background: #f5f7fa;
   --foreground: #0b1f33;
 
-  --primary: #0a66c2;       /* corporate blue */
-  --secondary: #1f3a5f;     /* dark navy */
-  --accent: #4f8cff;        /* light blue */
+  --primary: #0a66c2;
+  --secondary: #1f3a5f;
+  --accent: #4f8cff;
   --muted: #6b7280;
 }
 
-body {
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: "Inter", Arial, Helvetica, sans-serif;
+/* ✅ IMPORTANT FIX */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* ✅ sirf horizontal band */
+  overflow-y: auto;   /* ✅ vertical scroll allowed */
+  scroll-behavior: auto; /* GSAP ke sath smooth scroll conflict avoid */
 }
 
-/* Smooth scrolling like modern websites */
-html {
-  scroll-behavior: smooth;
+/* Panels for GSAP stacking */
+.panel {
+  will-change: transform;
+  position: absolute; /* 🔥 IMPORTANT */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh; /* full screen */
 }
 
-/* Headings */
-/* h1, h2, h3, h4 {
-  color: var(--secondary);
-  font-weight: 700;
-} */
-
-/* Paragraph */
-/* p {
-  color: #4b5563;
-  line-height: 1.7;
-} */
-
-/* Custom container spacing like MNC sites */
-.container-mnc {
-  max-width: 1200px;
-  margin: auto;
-  padding: 0 20px;
+/* Optional: Better rendering */
+* {
+  box-sizing: border-box;
 }

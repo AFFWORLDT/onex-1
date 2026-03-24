@@ -3,153 +3,191 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const GlobalReach: React.FC = () => {
+const GlobalReachPremium: React.FC = () => {
   const features = [
     {
       title: "Global Presence",
       description:
-        "OneX Group operates in 10 markets globally, connecting agents across borders. This creates opportunities to collaborate. Share best practices and expand your reach to new markets.",
+        "Operate across 10+ international markets with a strong ecosystem of partners, enabling seamless cross-border collaboration and expansion.",
+      image:
+        "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?q=80&w=1200&auto=format&fit=crop",
     },
     {
       title: "Powerful Referral Network",
       description:
-        "OneX global network provides access to a vast pool of agents, allowing you to refer clients and receive referrals from agents around the world. This strengthens your business and creates opportunities for growth.",
+        "Leverage a worldwide referral network that allows you to generate and receive high-quality leads across regions.",
+      image:
+        "https://images.unsplash.com/photo-1556761175-4b46a572b786?q=80&w=1200&auto=format&fit=crop",
     },
     {
       title: "Global Community of Experts",
       description:
-        "Connect with experienced professionals from diverse insights, best practices, and resources. This creates a collaborative environment for continuous learning and growth.",
+        "Connect with experienced professionals, share insights, and grow within a trusted global community.",
+      image:
+        "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1200&auto=format&fit=crop",
     },
   ];
 
   const flags = [
-    { src: "https://flagcdn.com/w80/ca.png", alt: "Canada" },
-    { src: "https://flagcdn.com/w80/ae.png", alt: "UAE" },
-    { src: "https://flagcdn.com/w80/in.png", alt: "India" },
-    { src: "https://flagcdn.com/w80/bh.png", alt: "Bahrain" },
+    { src: "https://flagcdn.com/w320/ca.png", name: "Canada" },
+    { src: "https://flagcdn.com/w320/ae.png", name: "UAE" },
+    { src: "https://flagcdn.com/w320/in.png", name: "India" },
+    { src: "https://flagcdn.com/w320/gb.png", name: "UK" },
+    { src: "https://flagcdn.com/w320/us.png", name: "USA" },
+    { src: "https://flagcdn.com/w320/au.png", name: "Australia" },
   ];
 
   return (
-    <div className="relative w-full min-h-screen flex items-stretch overflow-hidden font-sans">
-      
+    <section className="relative h-screen w-full overflow-hidden flex flex-col md:flex-row font-sans">
+
       {/* BACKGROUND */}
-      <motion.div
-        initial={{ scale: 1.1 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 2 }}
-        className="absolute inset-0 z-0"
-      >
+      <div className="absolute inset-0 z-0">
         <img
-          src="/images/canada2.png"
-          alt="Global City"
-          className="w-full h-full object-cover"
+          src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1600&auto=format&fit=crop"
+          className="w-full h-full object-cover scale-110"
         />
-        <div className="absolute inset-0 bg-black/30"></div>
-      </motion.div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
+      </div>
 
-      <div className="relative z-10 flex flex-col md:flex-row w-full">
-        
-        {/* LEFT SIDEBAR */}
-        <motion.div
-          initial={{ x: -80, opacity: 0 }}
-          whileInView={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="w-full md:w-[30%] bg-[#1a1f3d] p-10 md:p-16 flex flex-col justify-center"
-        >
-          <header className="mb-12">
-            <motion.h1
-              initial={{ y: 40, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="text-6xl font-bold text-white leading-tight"
-            >
-              Global
-            </motion.h1>
+      <div className="relative z-10 w-full h-full flex flex-col md:flex-row">
 
-            <motion.h1
-              initial={{ y: 40, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="text-6xl font-bold text-gray-500/50 leading-tight -mt-2"
-            >
-              Reach
-            </motion.h1>
-          </header>
+        {/* LEFT PANEL */}
+        <div className="w-full md:w-[35%] h-full bg-white/5 backdrop-blur-2xl border-r border-white/10 flex flex-col overflow-hidden">
 
-          <div className="mt-auto">
-            <p className="text-white text-xs font-bold tracking-[0.2em] mb-6 uppercase">
-              Global Presence
+          <div className="h-full overflow-y-auto px-6 md:px-10 py-10 space-y-10">
+
+            {/* TITLE */}
+            <div>
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-5xl md:text-6xl font-bold text-white"
+              >
+                Global
+              </motion.h1>
+
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="text-5xl md:text-6xl font-bold text-white/30 -mt-2"
+              >
+                Reach
+              </motion.h1>
+            </div>
+
+            {/* DESCRIPTION */}
+            <p className="text-white/70 text-sm leading-relaxed">
+              Expanding across borders with a powerful ecosystem of agents,
+              partners, and global opportunities.
             </p>
 
             {/* FLAGS */}
-            <div className="grid grid-cols-2 gap-4 mb-8">
-              {flags.map((flag, i) => (
-                <motion.div
-                  key={i}
-                  whileHover={{ scale: 1.08 }}
-                  transition={{ type: "spring", stiffness: 200 }}
-                  className="overflow-hidden rounded shadow-sm border border-white/10"
-                >
-                  <img
-                    src={flag.src}
-                    alt={flag.alt}
-                    className="w-full h-auto object-cover"
-                  />
-                </motion.div>
-              ))}
+            <div>
+              <p className="text-white text-xs tracking-[0.25em] uppercase mb-5">
+                Global Network
+              </p>
+
+              <div className="grid grid-cols-3 gap-3">
+                {flags.map((flag, i) => (
+                  <div
+                    key={i}
+                    className="group relative rounded-lg overflow-hidden border border-white/10 aspect-[4/3]"
+                  >
+                    <img
+                      src={flag.src}
+                      alt={flag.name}
+                      className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                    />
+                    <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition" />
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <p className="text-gray-400 text-[10px] font-bold tracking-widest uppercase">
-              10+ More Countries
-            </p>
           </div>
-        </motion.div>
+        </div>
 
-        {/* RIGHT CONTENT */}
-        <motion.div
-          initial={{ x: 80, opacity: 0 }}
-          whileInView={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="w-full md:w-[70%] p-8 md:p-16 flex items-center justify-center"
-        >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl">
-            
+        {/* RIGHT PANEL */}
+        <div className="w-full md:w-[65%] h-full flex items-center px-6 md:px-12">
+
+          {/* DESKTOP GRID */}
+          <div className="hidden md:grid grid-cols-3 gap-8 w-full">
+
             {features.map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ y: 60, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                transition={{ delay: index * 0.2, duration: 0.6 }}
+                initial={{ opacity: 0, y: 60 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.2 }}
                 viewport={{ once: true }}
-                whileHover={{ y: -10, scale: 1.02 }}
-                className="relative bg-[#1a1f3d]/90 backdrop-blur-sm p-8 pt-16 pb-16 border-t-4 border-transparent hover:border-yellow-500 transition-all duration-300 min-h-[450px] flex flex-col group"
+                whileHover={{ y: -12, scale: 1.03 }}
+                className="group relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl min-h-[420px]"
               >
-                {/* Glow Effect */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-20 bg-yellow-400 blur-2xl transition"></div>
 
-                {/* Corner */}
-                <div className="absolute top-0 right-0 w-8 h-8 bg-white/20 rounded-bl-xl"></div>
-                <div className="absolute bottom-0 left-0 w-12 h-12 bg-white/10 rounded-tr-xl"></div>
+                {/* IMAGE */}
+                <div className="h-1/2 overflow-hidden">
+                  <img
+                    src={item.image}
+                    className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
+                  />
+                </div>
 
-                <h3 className="text-yellow-500 font-bold text-lg mb-6 leading-tight">
-                  {item.title}
-                </h3>
+                {/* CONTENT */}
+                <div className="p-6 flex flex-col justify-between h-1/2">
+                  <h3 className="text-white font-semibold text-xl mb-3">
+                    {item.title}
+                  </h3>
 
-                <p className="text-white/80 text-[13px] leading-relaxed font-light">
-                  {item.description}
-                </p>
+                  <p className="text-white/70 text-sm leading-relaxed">
+                    {item.description}
+                  </p>
+
+                  <div className="mt-5 h-[2px] w-12 bg-gradient-to-r from-yellow-400 to-yellow-600 group-hover:w-20 transition-all duration-300" />
+                </div>
+
               </motion.div>
             ))}
-          </div>
-        </motion.div>
 
-        {/* PAGE NUMBER */}
-       
+          </div>
+
+          {/* MOBILE SLIDER */}
+          <div className="md:hidden w-full flex gap-5 overflow-x-auto snap-x snap-mandatory">
+
+            {features.map((item, index) => (
+              <motion.div
+                key={index}
+                whileTap={{ scale: 0.97 }}
+                className="min-w-[85%] snap-center rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-xl shadow-xl"
+              >
+
+                <div className="h-48 overflow-hidden">
+                  <img
+                    src={item.image}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                <div className="p-5">
+                  <h3 className="text-white font-semibold text-lg mb-2">
+                    {item.title}
+                  </h3>
+
+                  <p className="text-white/70 text-sm leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+
+              </motion.div>
+            ))}
+
+          </div>
+
+        </div>
+
       </div>
-    </div>
+    </section>
   );
 };
 
-export default GlobalReach;
+export default GlobalReachPremium;

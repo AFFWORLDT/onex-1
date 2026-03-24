@@ -1,4 +1,4 @@
-import Navbar from "@/component/Navbar";
+
 import OneXEmpireHero from "@/pages/home/OneXEmpireHero";
 import VisionaryLeadership from "@/pages/about/VisionaryLeadership";
 import ProvenSuccess from "@/pages/about/ProvenSuccess";
@@ -29,57 +29,26 @@ import CSRShowcase from "@/pages/foundation/CSRShowcase";
 import SocialAwardsSection from "@/pages/foundation/SocialAwardsSection";
 import AwardsGrid from "@/pages/contact/AwardsGrid";
 import KeyHighlights from "@/pages/contact/KeyHighlights";
+import ScrollReveal from "@/component/SmoothScroll";
+import StackedScroll from "@/component/StackedScroll";
+
+
 export default function Home() {
+ 
+
+
   return (
    <>
-   <Navbar />
+   
     <main>
       <section id="home">
-        <OneXEmpireHero/>
+       <OneXEmpireHero/>
+        <VisionaryLeadership/>
+        <ProvenSuccess/>
+        <VerticalsTimeline/>
+        
       </section>
-<section id="about">
-  <VisionaryLeadership/>
-  <ProvenSuccess/>
-  <VerticalsTimeline/>
-</section>
-<section id="verticals">
-  <GlobalReach/>
-  <OnexDevelopment/>
-  <WhyOnexDevelopments/>
-  <ProjectsInCanada/>
-  <ProjectsInIndia/>
-  <ProjectUAE/>
-
-</section>
-<section id="projects">
-  <OneXPresentation/>
-  <OneXCourses/>
-  <OneXPropertiesHero/>
-  <AboutOnex/>
-  <PeopleSection/>
-  <OnexEntertainment/>
-</section>
-<section id="academy">
-  <RealEstateServiceSlide/>
-  <AnalysisServices/>
-  <VocaTechSlide/>
-  
-</section>
-<section id="properties">
-  <VocatechAbout/>
-  <SevenSeasHero/>
-  <HotelShowcase/>
-</section>
-<section id="services">
-  <RealEstateTokenization/>
-  <BPTXMarketplace/>
-  <HomeXSlide/>
-</section>
-<section id="foundation">
-  <OneXFoundation/>
-  <CSRShowcase/>
-  <SocialAwardsSection/>
-</section>
+    
 <section id="contact">
   <AwardsGrid/>
   <KeyHighlights/>

@@ -1,4 +1,7 @@
-import React from "react";
+"use client";
+
+import React, { useRef } from "react";
+import { motion } from "framer-motion";
 import {
   FaChartLine,
   FaKey,
@@ -12,77 +15,115 @@ import {
 } from "react-icons/fa";
 
 const WhyOnexDevelopments: React.FC = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const features = [
-    { icon: FaChartLine, title: "High ROI", desc: "A managed project, designed for profitable returns." },
-    { icon: FaKey, title: "Freehold Ownership", desc: "Full ownership rights." },
-    { icon: FaConciergeBell, title: "Amenities", desc: "Luxury lifestyle facilities." },
-    { icon: FaCity, title: "Appreciation", desc: "High-value prime locations." },
-    { icon: FaUserShield, title: "Track Record", desc: "Trusted & reliable brand." },
-    { icon: FaMapMarkerAlt, title: "Locations", desc: "Strategic positioning." },
-    { icon: FaFileContract, title: "Compliance", desc: "Fully regulated projects." },
-    { icon: FaGem, title: "Luxury", desc: "Premium interiors & design." },
-    { icon: FaHome, title: "Mortgage", desc: "Flexible mortgage solutions." },
+    { icon: FaChartLine, title: "High ROI", desc: "Strong investment returns." },
+    { icon: FaKey, title: "Freehold", desc: "Full ownership rights." },
+    { icon: FaConciergeBell, title: "Amenities", desc: "Luxury lifestyle." },
+    { icon: FaCity, title: "Growth", desc: "Prime locations." },
+    { icon: FaUserShield, title: "Trusted", desc: "Reliable brand." },
+    { icon: FaMapMarkerAlt, title: "Location", desc: "Strategic areas." },
+    { icon: FaFileContract, title: "Compliance", desc: "Fully regulated." },
+    { icon: FaGem, title: "Luxury", desc: "Premium design." },
+    { icon: FaHome, title: "Mortgage", desc: "Flexible plans." },
   ];
 
   return (
-    <div className="relative w-full min-h-screen bg-[#060918] flex items-center justify-center px-4 py-10 overflow-hidden">
-      
-      {/* Background */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
+    <section className="relative w-full h-screen overflow-hidden bg-[#040714] flex items-center justify-center">
+
+      {/* BACKGROUND */}
+      <div className="absolute inset-0 z-0">
         <img
-          src="/images/left.jpg"
-          className="absolute bottom-0 left-0 w-[35%] opacity-25"
-          alt=""
+          src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1600&auto=format&fit=crop"
+          className="w-full h-full object-cover opacity-25"
         />
-        <img
-          src="/images/right.jpg"
-          className="absolute top-0 right-0 w-[30%] opacity-25"
-          alt=""
-        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/80 to-black" />
       </div>
 
-      {/* Card */}
-      <div className="relative z-10 w-full max-w-5xl bg-gradient-to-br from-[#b38743] via-[#d4af37] to-[#8a632a] rounded-2xl shadow-2xl border border-white/20 px-6 md:px-10 py-8">
-        
-        {/* Heading */}
-        <div className="text-center mb-6">
-          <h1 className="text-2xl md:text-3xl font-bold text-white italic mb-2">
-            Why ONEX Developments?
-          </h1>
-          <p className="text-white/80 text-xs md:text-sm max-w-xl mx-auto">
-            High-growth investments backed by expertise, strategic locations, and premium developments.
-          </p>
-        </div>
+      {/* CONTENT */}
+      <div className="relative z-10 w-full max-w-6xl h-full flex flex-col justify-center px-5">
 
-        {/* Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        {/* SAFE TOP SPACE (Navbar fix) */}
+        <div className="h-[60px] md:hidden" />
+
+        {/* HEADING */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-6"
+        >
+          <h1 className="text-2xl md:text-4xl font-semibold text-white">
+            Why <span className="text-yellow-400">ONEX</span> Developments
+          </h1>
+          <p className="text-white/60 text-xs md:text-sm mt-2 max-w-md mx-auto">
+            Designed for growth, stability, and premium real estate investment outcomes.
+          </p>
+        </motion.div>
+
+        {/* DESKTOP GRID */}
+        <div className="hidden md:grid grid-cols-3 gap-4">
+
           {features.map((f, i) => {
             const Icon = f.icon;
             return (
-              <div
+              <motion.div
                 key={i}
-                className="bg-black/10 border border-white/10 rounded-lg p-3 text-center hover:bg-black/20 transition"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.08 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -6 }}
+                className="group bg-white/5 border border-white/10 rounded-xl p-5 text-center backdrop-blur-xl hover:bg-white/10 transition"
               >
-                <div className="w-9 h-9 mx-auto mb-2 flex items-center justify-center rounded-full bg-white/10">
-                  <Icon className="text-yellow-100 text-sm" />
+                <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 text-black text-lg shadow-lg">
+                  <Icon />
                 </div>
 
-                <h3 className="text-[11px] font-semibold text-white uppercase mb-1">
+                <h3 className="text-white text-sm font-semibold mb-2">
                   {f.title}
                 </h3>
 
-                <p className="text-[10px] text-white/70 leading-tight">
+                <p className="text-white/60 text-xs leading-relaxed">
                   {f.desc}
                 </p>
-              </div>
+              </motion.div>
+            );
+          })}
+
+        </div>
+
+        {/* 🔥 MOBILE PREMIUM CAROUSEL */}
+        <div
+          ref={containerRef}
+          className="md:hidden flex gap-5 overflow-x-auto snap-x snap-mandatory px-2 pb-4"
+        >
+          {features.map((f, i) => {
+            const Icon = f.icon;
+            return (
+              <motion.div
+                key={i}
+                whileTap={{ scale: 0.95 }}
+                className="min-w-[80%] snap-center bg-white/5 border border-white/10 rounded-2xl p-6 text-center backdrop-blur-xl"
+              >
+                <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 text-black text-xl shadow-lg">
+                  <Icon />
+                </div>
+
+                <h3 className="text-white text-base font-semibold mb-2">
+                  {f.title}
+                </h3>
+
+                <p className="text-white/60 text-sm">
+                  {f.desc}
+                </p>
+              </motion.div>
             );
           })}
         </div>
 
-        {/* Footer */}
-       
       </div>
-    </div>
+    </section>
   );
 };
 

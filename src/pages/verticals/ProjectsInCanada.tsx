@@ -1,141 +1,144 @@
-import React from 'react';
+"use client";
+
+import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
+import { motion } from "framer-motion";
+
+// Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
 
 const ProjectsInCanada: React.FC = () => {
-
   const mainProjects = [
     {
-      img: '/images/gulf.jpg',
-      title: "ST. Ignace Golf Club, Saint-Ignace, NB",
-      desc: "The New Golf Club to be launched in St.-Margarets, New Brunswick located on Highway 11 minutes away from Moncton."
+      img: "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?q=80&w=1200",
+      title: "ST. Ignace Golf Club",
+      desc: "Premium golf development near Moncton with high investment potential.",
     },
     {
-      img: '/images/Moncton.jpg',
-      title: "The Propeller Of Moncton, NB",
-      desc: [
-        "Propeller is one of the major cities in New Brunswick being a part of the Greater Moncton Area.",
-        "The property is a 1.25 acres-shaped lot on a prime commercial location being right opposite the Moncton Airport.",
-        "This property is a perfect place to put up a large-vessel plaza welcoming a large crowd from all over.",
-        "We plan to build around 7 shops and a restaurant in the plaza."
-      ]
-    }
+      img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1200",
+      title: "Propeller Of Moncton",
+      desc: "Prime commercial plaza opposite airport with shops & restaurant.",
+    },
   ];
 
   const otherProjects = [
-    { img: '/images/queen.jpg', title: "Queen's Castle By RAS" },
-    { img: '/images/street.jpg', title: "Cunard Street, Richibucto, NB" },
-    { img: '/images/water.jpg', title: "Water Street, Miramichi, NB" }
+    { img: "https://images.unsplash.com/photo-1460317442991-0ec209397118?q=80&w=800", title: "Queen’s Castle" },
+    { img: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=800", title: "Cunard Street" },
+    { img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=800", title: "Water Street" },
+    { img: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?q=80&w=800", title: "Downtown Hub" },
+    { img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800", title: "Skyline Tower" },
   ];
 
   const projectList = [
-    "The Propeller Of Moncton, NB", "Queen's Castle By RAS", "The Monarch, Moncton, NB", 
-    "Pine Glenn Road", "Highlandview Road, Moncton, NB", "Anne Street, Moncton, NB", 
-    "Amirault Street, Dieppe, NB", "Route 440, St. Margarets, NB", "Hwy 115, Irish Town, NB", 
-    "Wesley Street, Moncton, NB", "Main Street, Grand Falls, NB", "Rt 8, Ludlow Parish, NB", 
-    "Pointe-Canot, Gloucester, NB", "3 Houses in Saint-John, NB"
+    "Moncton Projects", "Queen’s Castle", "The Monarch", "Pine Glenn Road",
+    "Highlandview Road", "Anne Street", "Amirault Street", "Route 440"
   ];
 
   return (
-    <div className="relative w-full bg-[#070b22] flex items-center justify-center px-4 sm:px-6 md:px-10 lg:px-16 py-10 md:py-16 overflow-hidden font-sans">
-
+    <section className="relative w-full h-full bg-[#050816] flex items-center overflow-hidden">
+      
       {/* BACKGROUND */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-1/2 left-0 w-72 sm:w-96 h-72 sm:h-96 rounded-full bg-blue-600/10 backdrop-blur-3xl transform -translate-y-1/2 -translate-x-1/2"></div>
-        <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
+        <img
+          src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1600"
+          alt="bg"
+          className="w-full h-full object-cover opacity-10"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent" />
       </div>
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-start lg:items-end">
-
-        {/* LEFT */}
-        <div className="lg:col-span-8 flex flex-col gap-6 md:gap-8">
-
-          {/* TOP */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-            {mainProjects.map((p, i) => (
-              <div key={i} className="group border border-white/20 rounded-[30px] md:rounded-[40px] bg-white/5 backdrop-blur-sm p-5 sm:p-6 md:p-8 hover:border-yellow-500 hover:bg-white/10 flex flex-col items-center text-center">
-
-                <div className="rounded-[20px] md:rounded-[30px] overflow-hidden w-full mb-4 md:mb-6 border border-white/10">
-                  <img src={p.img} alt={p.title} className="w-full h-[180px] sm:h-[200px] md:h-[220px] object-cover" />
-                </div>
-
-                <h3 className="text-base sm:text-lg md:text-xl font-bold text-white mb-3 md:mb-4">
-                  {p.title}
-                </h3>
-
-                {Array.isArray(p.desc) ? (
-                  <ul className="space-y-1 md:space-y-2 text-[11px] sm:text-xs text-gray-300 leading-relaxed text-left w-full">
-                    {p.desc.map((item, idx) => (
-                      <li key={idx} className="flex items-start">
-                        <span className="mr-2 text-yellow-500">•</span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p className="text-[11px] sm:text-xs text-gray-300 leading-relaxed">
-                    {p.desc}
-                  </p>
-                )}
-              </div>
-            ))}
-          </div>
-
-          {/* BOTTOM */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
-            {otherProjects.map((p, i) => (
-              <div key={i} className="group border border-white/20 rounded-[20px] md:rounded-[30px] bg-white/5 backdrop-blur-sm p-4 md:p-6 hover:border-yellow-500 hover:bg-white/10 flex flex-col items-center text-center">
-                
-                <div className="rounded-[15px] md:rounded-[20px] overflow-hidden w-full mb-4 md:mb-5 border border-white/10">
-                  <img src={p.img} alt={p.title} className="w-full h-[130px] sm:h-[150px] object-cover" />
-                </div>
-
-                <h4 className="text-xs sm:text-sm font-bold text-white">
-                  {p.title}
-                </h4>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* RIGHT */}
-        <div className="lg:col-span-4 flex flex-col h-full relative mt-6 lg:mt-0">
-
-          {/* HEADING */}
-          <header className="mb-6 md:mb-10 text-left lg:text-right">
-            <span className="text-white text-xl sm:text-2xl md:text-3xl italic block">
-              "PROJECT IN"
-            </span>
-            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-white leading-[1]">
-              CANADA
+      <div className="relative z-10 w-full max-w-7xl mx-auto h-full flex flex-col md:grid md:grid-cols-12 gap-8 px-6 py-12 md:py-20">
+        
+        {/* LEFT SECTION (TEXT & LIST) */}
+        <div className="md:col-span-4 flex flex-col justify-center space-y-6">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight">
+              Projects in <br />
+              <span className="text-yellow-400 font-black text-5xl md:text-8xl">Canada</span>
             </h1>
-          </header>
+          </motion.div>
 
-          {/* LIST */}
-          <div className="mt-4 pl-3 md:pl-4 border-l border-white/10 mb-10 md:mb-16 max-h-[250px] md:max-h-[350px] overflow-y-auto">
-            <ul className="space-y-1 text-[11px] sm:text-xs text-slate-300">
-              {projectList.map((project, idx) => (
-                <li key={idx} className="flex gap-2">
-                  <span className="text-slate-400">{idx + 1}.</span>
-                  {project}
+          <div className="bg-white/5 border-l-4 border-yellow-400 p-6 backdrop-blur-sm">
+            <h3 className="text-white font-bold uppercase tracking-widest text-sm mb-4">Key Locations</h3>
+            <ul className="grid grid-cols-2 gap-y-2 gap-x-4 text-[11px] md:text-xs text-white/60">
+              {projectList.map((p, i) => (
+                <li key={i} className="hover:text-yellow-400 transition-colors cursor-default flex items-center">
+                  <span className="text-yellow-400 mr-2">/</span> {p}
                 </li>
               ))}
             </ul>
           </div>
+        </div>
 
-          {/* IMAGES */}
-          <div className="relative mt-auto w-full h-[200px] sm:h-[260px] md:h-80 flex items-center justify-end">
-
-            <div className="absolute top-0 right-0 w-[50%] md:w-[60%] h-full opacity-60">
-              <img src="/images/parliament.jpg" alt="" className="w-full h-full object-contain object-top" />
-            </div>
-
-            <div className="absolute bottom-0 left-0 md:-left-10 w-[110%] md:w-[120%]">
-              <img src="/images/flagIs.png" alt="Canadian Flag" className="w-full object-contain" />
-            </div>
+        {/* RIGHT SECTION (CARDS & SLIDER) */}
+        <div className="md:col-span-8 flex flex-col justify-center space-y-8 h-full overflow-hidden">
+          
+          {/* TOP FEATURED CARDS */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {mainProjects.map((p, i) => (
+              <div key={i} className="group relative bg-white/5 rounded-2xl overflow-hidden border border-white/10 p-2">
+                <div className="h-40 md:h-48 rounded-xl overflow-hidden relative">
+                  <img src={p.img} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
+                </div>
+                <div className="p-4">
+                  <h3 className="text-white font-bold text-lg mb-1">{p.title}</h3>
+                  <p className="text-white/50 text-xs line-clamp-2">{p.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
 
+          {/* BOTTOM GALLERY SLIDER */}
+          <div className="w-full">
+            <h4 className="text-white/40 text-[10px] font-bold uppercase tracking-[0.3em] mb-4 ml-1">Other Developments</h4>
+            <Swiper
+              modules={[Autoplay, Pagination]}
+              spaceBetween={20}
+              slidesPerView={1.5}
+              autoplay={{ delay: 3000 }}
+              pagination={{ clickable: true }}
+              breakpoints={{
+                640: { slidesPerView: 2.5 },
+                1024: { slidesPerView: 3.5 },
+              }}
+              className="pb-10"
+            >
+              {otherProjects.map((p, i) => (
+                <SwiperSlide key={i}>
+                  <div className="relative aspect-[4/5] rounded-xl overflow-hidden border border-white/10 group">
+                    <img src={p.img} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent flex items-end p-4">
+                      <p className="text-white text-[10px] font-bold uppercase tracking-wider">{p.title}</p>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
         </div>
+
       </div>
-    </div>
+
+      <style jsx global>{`
+        .swiper-pagination-bullet {
+          background: rgba(255, 255, 255, 0.3) !important;
+          width: 20px !important;
+          border-radius: 4px !important;
+          transition: all 0.3s !important;
+        }
+        .swiper-pagination-bullet-active {
+          background: #facc15 !important;
+          width: 40px !important;
+        }
+      `}</style>
+    </section>
   );
 };
 
