@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-/* ✅ TYPE FIX */
+/* ✅ TYPE */
 type NavLink = {
   name: string;
   path?: string;
@@ -40,7 +40,7 @@ export default function SideNavbar() {
     setMounted(true);
   }, []);
 
-  /* ✅ SCROLL LOCK FIX */
+  /* ✅ SCROLL LOCK */
   useEffect(() => {
     if (typeof window !== "undefined") {
       document.body.style.overflow = open ? "hidden" : "auto";
@@ -57,7 +57,6 @@ export default function SideNavbar() {
     <>
       {/* 🔹 TOPBAR */}
       <header className="fixed top-0 w-full flex justify-between items-center px-6 md:px-12 py-5 z-50">
-        
         <Link href="/" onClick={() => setOpen(false)}>
           <Image
             src="/images/prim_logo.png"
@@ -91,7 +90,7 @@ export default function SideNavbar() {
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        {/* ❌ CLOSE BUTTON */}
+        {/* CLOSE */}
         <button
           onClick={() => setOpen(false)}
           className="absolute top-6 right-6 border border-white/20 p-2 rounded-full hover:bg-white hover:text-black transition"
@@ -109,70 +108,74 @@ export default function SideNavbar() {
             </p>
 
             <nav className="flex flex-col gap-6">
-              {navLinks.map((link) => (
-                <div key={link.name}>
-                  
-                  {/* 🔹 NORMAL LINK */}
-                  {!link.children ? (
-                    <Link
-                      href={link.path || "#"} // ✅ SAFE FIX
-                      onClick={() => setOpen(false)}
-                      className={`block text-xl font-medium transition ${
-                        pathname === link.path
-                          ? "text-white"
-                          : "text-gray-400 hover:text-white"
-                      }`}
-                    >
-                      {link.name}
+              {navLinks.map((link) => {
+                const hasChildren =
+                  link.children && link.children.length > 0;
 
-                      {pathname === link.path && (
-                        <div className="h-[2px] w-8 bg-white mt-1"></div>
-                      )}
-                    </Link>
-                  ) : (
-                    <>
-                      {/* 🔹 DROPDOWN */}
-                      <button
-                        onClick={() => toggleDropdown(link.name)}
-                        className="flex items-center justify-between w-full text-xl font-medium text-gray-300 hover:text-white transition"
-                      >
-                        {link.name}
-                        <ChevronDown
-                          className={`transition-transform duration-300 ${
-                            openDropdown === link.name ? "rotate-180" : ""
+                return (
+                  <div key={link.name}>
+                    
+                    {/* 🔥 DROPDOWN CASE */}
+                    {hasChildren ? (
+                      <>
+                        <button
+                          onClick={() => toggleDropdown(link.name)}
+                          className="flex items-center justify-between w-full text-xl font-medium text-gray-300 hover:text-white transition"
+                        >
+                          {link.name}
+                          <ChevronDown
+                            className={`transition-transform duration-300 ${
+                              openDropdown === link.name ? "rotate-180" : ""
+                            }`}
+                          />
+                        </button>
+
+                        <div
+                          className={`overflow-hidden transition-all duration-500 ${
+                            openDropdown === link.name
+                              ? "max-h-[400px] mt-4"
+                              : "max-h-0"
                           }`}
-                        />
-                      </button>
-
-                      {/* 🔥 CHILDREN */}
-                      <div
-                        className={`overflow-hidden transition-all duration-500 ${
-                          openDropdown === link.name
-                            ? "max-h-[400px] mt-4"
-                            : "max-h-0"
+                        >
+                          <div className="flex flex-col gap-4 pl-4 border-l border-white/10">
+                            {link.children!.map((child) => (
+                              <Link
+                                key={child.path}
+                                href={child.path}
+                                onClick={() => setOpen(false)}
+                                className={`text-base transition ${
+                                  pathname === child.path
+                                    ? "text-white"
+                                    : "text-gray-500 hover:text-white"
+                                }`}
+                              >
+                                {child.name}
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      /* 🔹 NORMAL LINK */
+                      <Link
+                        href={link.path || "#"}
+                        onClick={() => setOpen(false)}
+                        className={`block text-xl font-medium transition ${
+                          pathname === link.path
+                            ? "text-white"
+                            : "text-gray-400 hover:text-white"
                         }`}
                       >
-                        <div className="flex flex-col gap-4 pl-4 border-l border-white/10">
-                          {link.children.map((child) => (
-                            <Link
-                              key={child.path}
-                              href={child.path}
-                              onClick={() => setOpen(false)}
-                              className={`text-base transition ${
-                                pathname === child.path
-                                  ? "text-white"
-                                  : "text-gray-500 hover:text-white"
-                              }`}
-                            >
-                              {child.name}
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-                    </>
-                  )}
-                </div>
-              ))}
+                        {link.name}
+
+                        {pathname === link.path && (
+                          <div className="h-[2px] w-8 bg-white mt-1"></div>
+                        )}
+                      </Link>
+                    )}
+                  </div>
+                );
+              })}
             </nav>
           </div>
 
