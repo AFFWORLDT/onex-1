@@ -6,15 +6,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+/* ✅ TYPE FIX */
+type NavLink = {
+  name: string;
+  path?: string;
+  children?: { name: string; path: string }[];
+};
+
 export default function SideNavbar() {
   const [open, setOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
 
   const pathname = usePathname();
 
-  const navLinks = [
-    // { name: "Home", path: "/" },
-
+  /* ✅ NAV DATA */
+  const navLinks: NavLink[] = [
     {
       name: "Business",
       children: [
@@ -26,18 +33,25 @@ export default function SideNavbar() {
         { name: "Foundation", path: "/business/foundation" },
       ],
     },
-
-    // { name: "Contact", path: "/contact" },
   ];
 
-  // Scroll lock
+  /* ✅ HYDRATION FIX */
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "auto";
+    setMounted(true);
+  }, []);
+
+  /* ✅ SCROLL LOCK FIX */
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      document.body.style.overflow = open ? "hidden" : "auto";
+    }
   }, [open]);
 
   const toggleDropdown = (name: string) => {
     setOpenDropdown(openDropdown === name ? null : name);
   };
+
+  if (!mounted) return null;
 
   return (
     <>
@@ -51,6 +65,7 @@ export default function SideNavbar() {
             width={110}
             height={40}
             className="cursor-pointer"
+            priority
           />
         </Link>
 
@@ -65,18 +80,18 @@ export default function SideNavbar() {
       {/* 🔹 OVERLAY */}
       <div
         onClick={() => setOpen(false)}
-        className={`fixed inset-0 bg-black/60 backdrop-blur-md z-40 transition ${
+        className={`fixed inset-0 bg-black/60 backdrop-blur-md z-40 transition duration-500 ${
           open ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
       />
 
       {/* 🔹 SIDEBAR */}
       <aside
-        className={`fixed top-0 right-0 h-screen w-full md:w-[420px] bg-[#0b0b0b] text-white z-50 transform transition duration-500 ${
+        className={`fixed top-0 right-0 h-screen w-full md:w-[420px] bg-[#0b0b0b] text-white z-50 transform transition-transform duration-500 ease-in-out ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        {/* Close */}
+        {/* ❌ CLOSE BUTTON */}
         <button
           onClick={() => setOpen(false)}
           className="absolute top-6 right-6 border border-white/20 p-2 rounded-full hover:bg-white hover:text-black transition"
@@ -84,9 +99,10 @@ export default function SideNavbar() {
           <X size={18} />
         </button>
 
-        {/* Content */}
+        {/* CONTENT */}
         <div className="h-full flex flex-col justify-between px-8 py-20">
           
+          {/* NAV */}
           <div>
             <p className="text-xs tracking-widest text-gray-500 mb-8">
               NAVIGATION
@@ -99,7 +115,7 @@ export default function SideNavbar() {
                   {/* 🔹 NORMAL LINK */}
                   {!link.children ? (
                     <Link
-                      href={link.path!}
+                      href={link.path || "#"} // ✅ SAFE FIX
                       onClick={() => setOpen(false)}
                       className={`block text-xl font-medium transition ${
                         pathname === link.path
@@ -115,14 +131,14 @@ export default function SideNavbar() {
                     </Link>
                   ) : (
                     <>
-                      {/* 🔹 DROPDOWN BUTTON */}
+                      {/* 🔹 DROPDOWN */}
                       <button
                         onClick={() => toggleDropdown(link.name)}
                         className="flex items-center justify-between w-full text-xl font-medium text-gray-300 hover:text-white transition"
                       >
                         {link.name}
                         <ChevronDown
-                          className={`transition ${
+                          className={`transition-transform duration-300 ${
                             openDropdown === link.name ? "rotate-180" : ""
                           }`}
                         />
@@ -160,7 +176,7 @@ export default function SideNavbar() {
             </nav>
           </div>
 
-          {/* FOOTER */}
+          {/* 🔹 FOOTER */}
           <div className="text-xs text-gray-500">
             <p>© 2026 OneX</p>
             <div className="flex gap-4 mt-3">
