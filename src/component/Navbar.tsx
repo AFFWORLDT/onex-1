@@ -1,195 +1,158 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
-import Image from "next/image";
+import { Menu, Search, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import Sidebar from "./Sidebar";
 
-/* ✅ TYPE */
-type NavLink = {
-  name: string;
-  path?: string;
-  children?: { name: string; path: string }[];
-};
-
-export default function SideNavbar() {
-  const [open, setOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const [mounted, setMounted] = useState(false);
-
+export default function Navbar() {
   const pathname = usePathname();
+  const isHomePage = pathname === "/";
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isVenturesOpen, setIsVenturesOpen] = useState(false);
 
-  /* ✅ NAV DATA */
-  const navLinks: NavLink[] = [
-    {
-      name: "Business",
-      children: [
-        { name: "Verticals", path: "/business/verticals" },
-        { name: "Projects", path: "/business/projects" },
-        { name: "Academy", path: "/business/academy" },
-        { name: "Properties", path: "/business/properties" },
-        { name: "Services", path: "/business/services" },
-        { name: "Foundation", path: "/business/foundation" },
-      ],
-    },
-  ];
-
-  /* ✅ HYDRATION FIX */
   useEffect(() => {
-    setMounted(true);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  /* ✅ SCROLL LOCK */
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      document.body.style.overflow = open ? "hidden" : "auto";
-    }
-  }, [open]);
+  const navLinks = [
+    { name: "About", path: "/about" },
+    { name: "Ventures", path: "/ventures" },
+    { name: "Blog", path: "/blog" },
+    { name: "Contact", path: "/contact" },
+  ];
 
-  const toggleDropdown = (name: string) => {
-    setOpenDropdown(openDropdown === name ? null : name);
-  };
+  const ventureLinks = [
+    { name: "ONEX Academy", href: "/ventures/academy" },
+    { name: "Properties", href: "/ventures/properties" },
+    { name: "Services", href: "/ventures/services" },
+    { name: "Foundation", href: "/ventures/foundation" },
+    { name: "Verticals", href: "/ventures/verticals" },
+    { name: "Projects", href: "/ventures/projects" },
+  ];
 
-  if (!mounted) return null;
+  // Logic for dynamic text colors
+  const textColorClass = isHomePage && !isScrolled ? "text-white" : "text-black";
+  const mutedColorClass = isHomePage && !isScrolled ? "text-gray-400" : "text-gray-500";
+  const logoMainColor = isHomePage && !isScrolled ? "text-white" : "text-black";
 
   return (
     <>
-      {/* 🔹 TOPBAR */}
-      <header className="fixed top-0 w-full flex justify-between items-center px-6 md:px-12 py-5 z-50">
-        <Link href="/" onClick={() => setOpen(false)}>
-          <Image
-            src="/images/prim_logo.png"
-            alt="Logo"
-            width={110}
-            height={40}
-            className="cursor-pointer"
-            priority
-          />
-        </Link>
-
-        <button
-          onClick={() => setOpen(true)}
-          className="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-full text-sm font-medium hover:scale-105 transition"
-        >
-          Menu <Menu size={18} />
-        </button>
-      </header>
-
-      {/* 🔹 OVERLAY */}
-      <div
-        onClick={() => setOpen(false)}
-        className={`fixed inset-0 bg-black/60 backdrop-blur-md z-40 transition duration-500 ${
-          open ? "opacity-100 visible" : "opacity-0 invisible"
-        }`}
-      />
-
-      {/* 🔹 SIDEBAR */}
-      <aside
-        className={`fixed top-0 right-0 h-screen w-full md:w-[420px] bg-[#0b0b0b] text-white z-50 transform transition-transform duration-500 ease-in-out ${
-          open ? "translate-x-0" : "translate-x-full"
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
+          isScrolled ? "py-4 bg-white/80 backdrop-blur-xl shadow-sm" : "py-8"
         }`}
       >
-        {/* CLOSE */}
-        <button
-          onClick={() => setOpen(false)}
-          className="absolute top-6 right-6 border border-white/20 p-2 rounded-full hover:bg-white hover:text-black transition"
-        >
-          <X size={18} />
-        </button>
+        <div className="container mx-auto px-6 flex items-center justify-between">
+          {/* Logo */}
+          <Link href="/" className="group">
+            <div className="flex flex-col">
+              <span className={`text-2xl font-black tracking-tighter leading-none group-hover:text-gold transition-colors ${logoMainColor}`}>
+                DR. NITTIN <span className="text-gold group-hover:text-gold transition-colors">K.A.</span>
+              </span>
+              <span className={`text-[10px] font-bold tracking-[0.4em] uppercase mt-1 ${mutedColorClass}`}>
+                Personal Brand
+              </span>
+            </div>
+          </Link>
 
-        {/* CONTENT */}
-        <div className="h-full flex flex-col justify-between px-8 py-20">
-          
-          {/* NAV */}
-          <div>
-            <p className="text-xs tracking-widest text-gray-500 mb-8">
-              NAVIGATION
-            </p>
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center gap-12">
+            <div className={`flex items-center gap-8 px-10 py-3 rounded-full border transition-all ${
+              isScrolled ? "bg-black/5 border-black/5" : isHomePage ? "bg-white/5 border-white/10" : "bg-black/5 border-black/5"
+            }`}>
+              <Link
+                href="/about"
+                className={`text-[10px] font-bold uppercase tracking-widest transition-colors hover:text-gold ${textColorClass}`}
+              >
+                About
+              </Link>
+              
+              {/* Ventures Dropdown */}
+              <div 
+                className="relative group/dropdown"
+                onMouseEnter={() => setIsVenturesOpen(true)}
+                onMouseLeave={() => setIsVenturesOpen(false)}
+              >
+                <Link
+                  href="/ventures"
+                  className={`text-[10px] font-bold uppercase tracking-widest transition-colors flex items-center gap-1 hover:text-gold ${textColorClass}`}
+                >
+                  Ventures <ChevronDown size={12} className={`transition-transform duration-300 ${isVenturesOpen ? 'rotate-180' : ''}`} />
+                </Link>
+                
+                <AnimatePresence>
+                  {isVenturesOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      className="absolute top-full left-1/2 -translate-x-1/2 pt-6 w-56"
+                    >
+                      <div className="bg-white border border-black/10 rounded-2xl p-4 shadow-2xl backdrop-blur-xl">
+                        {ventureLinks.map((link) => (
+                          <Link
+                            key={link.name}
+                            href={link.href}
+                            className="block px-4 py-3 text-[10px] font-bold text-gray-500 hover:text-gold hover:bg-black/5 rounded-xl uppercase tracking-widest transition-all"
+                          >
+                            {link.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
 
-            <nav className="flex flex-col gap-6">
-              {navLinks.map((link) => {
-                const hasChildren =
-                  link.children && link.children.length > 0;
+              <Link
+                href="/blog"
+                className={`text-[10px] font-bold uppercase tracking-widest transition-colors hover:text-gold ${textColorClass}`}
+              >
+                Blog
+              </Link>
 
-                return (
-                  <div key={link.name}>
-                    
-                    {/* 🔥 DROPDOWN CASE */}
-                    {hasChildren ? (
-                      <>
-                        <button
-                          onClick={() => toggleDropdown(link.name)}
-                          className="flex items-center justify-between w-full text-xl font-medium text-gray-300 hover:text-white transition"
-                        >
-                          {link.name}
-                          <ChevronDown
-                            className={`transition-transform duration-300 ${
-                              openDropdown === link.name ? "rotate-180" : ""
-                            }`}
-                          />
-                        </button>
+              <Link
+                href="/contact"
+                className={`text-[10px] font-bold uppercase tracking-widest transition-colors hover:text-gold ${textColorClass}`}
+              >
+                Contact
+              </Link>
+            </div>
 
-                        <div
-                          className={`overflow-hidden transition-all duration-500 ${
-                            openDropdown === link.name
-                              ? "max-h-[400px] mt-4"
-                              : "max-h-0"
-                          }`}
-                        >
-                          <div className="flex flex-col gap-4 pl-4 border-l border-white/10">
-                            {link.children!.map((child) => (
-                              <Link
-                                key={child.path}
-                                href={child.path}
-                                onClick={() => setOpen(false)}
-                                className={`text-base transition ${
-                                  pathname === child.path
-                                    ? "text-white"
-                                    : "text-gray-500 hover:text-white"
-                                }`}
-                              >
-                                {child.name}
-                              </Link>
-                            ))}
-                          </div>
-                        </div>
-                      </>
-                    ) : (
-                      /* 🔹 NORMAL LINK */
-                      <Link
-                        href={link.path || "#"}
-                        onClick={() => setOpen(false)}
-                        className={`block text-xl font-medium transition ${
-                          pathname === link.path
-                            ? "text-white"
-                            : "text-gray-400 hover:text-white"
-                        }`}
-                      >
-                        {link.name}
-
-                        {pathname === link.path && (
-                          <div className="h-[2px] w-8 bg-white mt-1"></div>
-                        )}
-                      </Link>
-                    )}
-                  </div>
-                );
-              })}
-            </nav>
+            <button className={`p-3 rounded-full transition-colors ${
+              isHomePage && !isScrolled ? "text-white bg-white/5 hover:bg-gold hover:text-black" : "text-black bg-black/5 hover:bg-gold hover:text-white"
+            }`}>
+              <Search size={20} />
+            </button>
           </div>
 
-          {/* 🔹 FOOTER */}
-          <div className="text-xs text-gray-500">
-            <p>© 2026 OneX</p>
-            <div className="flex gap-4 mt-3">
-              <span className="hover:text-white cursor-pointer">LinkedIn</span>
-              <span className="hover:text-white cursor-pointer">Instagram</span>
-              <span className="hover:text-white cursor-pointer">Twitter</span>
-            </div>
+          {/* Mobile Navigation Toggle */}
+          <div className="lg:hidden flex items-center gap-4">
+            <button
+              onClick={() => setIsSidebarOpen(true)}
+              className={`w-12 h-12 flex flex-col items-center justify-center gap-1.5 border rounded-full transition-colors ${
+                isHomePage && !isScrolled ? "bg-white/5 border-white/10" : "bg-black/5 border-black/10"
+              }`}
+            >
+              <div className={`w-5 h-[2px] ${isHomePage && !isScrolled ? "bg-white" : "bg-black"}`} />
+              <div className={`w-3 h-[2px] self-end mr-3 ${isHomePage && !isScrolled ? "bg-white" : "bg-black"}`} />
+            </button>
           </div>
         </div>
-      </aside>
+      </motion.nav>
+
+      {/* Sidebar Component */}
+      <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
     </>
   );
 }

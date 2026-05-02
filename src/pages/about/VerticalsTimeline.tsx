@@ -6,52 +6,52 @@ import { motion } from "framer-motion";
 const VerticalsTimeline: React.FC = () => {
   const verticals = [
     {
-      topLogo: "ONEX DEVELOPMENT",
-      topDesc: "Real Estate Development & Management",
-      color: "from-indigo-400 to-indigo-600",
-      bottomDesc: "Vocatech University",
+      topLogo: "DEVELOPMENT",
+      topDesc: "Real Estate Development",
+      color: "from-gold/40 to-gold",
+      bottomDesc: "Higher Education",
       bottomLogo: "VOCATECH",
     },
     {
-      topLogo: "ONEX ACADEMY",
-      topDesc: "Real Estate Academy",
-      color: "from-cyan-400 to-cyan-600",
-      bottomDesc: "Hotel",
-      bottomLogo: "SEVEN SEAS HOTEL",
+      topLogo: "ACADEMY",
+      topDesc: "Professional Training",
+      color: "from-gold/30 to-gold/80",
+      bottomDesc: "Luxury Hospitality",
+      bottomLogo: "SEVEN SEAS",
     },
     {
-      topLogo: "ONEX PROPERTIES",
-      topDesc: "Properties",
-      color: "from-lime-400 to-lime-600",
-      bottomDesc: "Real Estate Tokenization",
+      topLogo: "PROPERTIES",
+      topDesc: "Asset Management",
+      color: "from-gold/20 to-gold/60",
+      bottomDesc: "Tokenization",
       bottomLogo: "BPTX",
     },
     {
-      topLogo: "ONEX ENTERTAINMENT",
-      topDesc: "Event & Marketing",
-      color: "from-yellow-400 to-yellow-600",
+      topLogo: "MARKETING",
+      topDesc: "Global Events",
+      color: "from-gold/30 to-gold/80",
       bottomDesc: "Vacation Homes",
       bottomLogo: "HOMEX",
     },
     {
-      topLogo: "ONEX CONSULTANCY",
-      topDesc: "Consulting & Advisory",
-      color: "from-red-400 to-red-600",
-      bottomDesc: "OneX Foundation",
-      bottomLogo: "ONEX FOUNDATION",
+      topLogo: "CONSULTANCY",
+      topDesc: "Advisory Services",
+      color: "from-gold/40 to-gold",
+      bottomDesc: "Social Impact",
+      bottomLogo: "FOUNDATION",
     },
   ];
 
   return (
-    <div className="w-full h-screen flex flex-col justify-center bg-[#f5f7fb] px-6 md:px-16 overflow-hidden">
+    <div className="w-full h-screen flex flex-col justify-center bg-white px-6 md:px-16 overflow-hidden">
       
       {/* HEADER */}
-      <div className="text-center mb-10">
-        <h2 className="text-3xl md:text-4xl font-bold text-[#0f172a] tracking-tight">
-          OneX Group
+      <div className="text-center mb-16">
+        <h2 className="text-4xl md:text-5xl font-black text-black tracking-tighter uppercase">
+          OneX Group <span className="text-gold">Verticals</span>
         </h2>
-        <p className="text-gray-500 mt-2 text-sm tracking-wide">
-          Our Verticals Ecosystem
+        <p className="text-gray-400 mt-4 text-xs font-bold tracking-[0.4em] uppercase">
+          A Global Ecosystem of Excellence
         </p>
       </div>
 
@@ -59,50 +59,50 @@ const VerticalsTimeline: React.FC = () => {
       <div className="relative max-w-7xl mx-auto w-full">
         
         {/* LINE */}
-        <div className="absolute top-1/2 left-0 w-full h-[2px] bg-gradient-to-r from-indigo-400 via-cyan-400 via-lime-400 via-yellow-400 to-red-400 hidden md:block" />
+        <div className="absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-gold to-transparent hidden md:block" />
 
-        <div className="grid md:grid-cols-5 gap-6 relative z-10">
+        <div className="grid md:grid-cols-5 gap-12 relative z-10">
           {verticals.map((v, idx) => (
             
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 60 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.15, duration: 0.5 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: idx * 0.1, duration: 0.6 }}
               viewport={{ once: true }}
               className="flex flex-col items-center group"
             >
 
               {/* TOP */}
               <motion.div 
-                whileHover={{ y: -6 }}
-                className="flex flex-col items-center mb-6 w-full"
+                whileHover={{ y: -10 }}
+                className="flex flex-col items-center mb-8 w-full"
               >
                 <div
-                  className={`w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br ${v.color} flex items-center justify-center text-white text-[9px] md:text-[10px] font-bold text-center shadow-lg transition duration-300 group-hover:scale-110`}
+                  className={`w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br ${v.color} flex items-center justify-center text-white text-[8px] md:text-[9px] font-black text-center shadow-2xl transition duration-500 group-hover:scale-110`}
                 >
                   {v.topLogo}
                 </div>
 
-                <div className="mt-3 bg-white p-3 rounded-lg shadow-sm text-center text-xs md:text-sm text-gray-700 group-hover:shadow-md transition">
+                <div className="mt-4 bg-white p-3 rounded-xl shadow-sm border border-black/5 text-center text-[10px] font-bold tracking-widest text-gray-500 uppercase group-hover:shadow-xl transition">
                   {v.topDesc}
                 </div>
               </motion.div>
 
               {/* DOT */}
-              <div className="hidden md:block w-4 h-4 rounded-full bg-white border-2 border-gray-300 shadow-md z-20" />
+              <div className="hidden md:block w-3 h-3 rounded-full bg-white border border-gold shadow-lg z-20" />
 
               {/* BOTTOM */}
               <motion.div 
-                whileHover={{ y: 6 }}
-                className="flex flex-col items-center mt-6 w-full"
+                whileHover={{ y: 10 }}
+                className="flex flex-col items-center mt-8 w-full"
               >
-                <div className="mb-3 bg-white p-3 rounded-lg shadow-sm text-center text-xs md:text-sm text-gray-700 group-hover:shadow-md transition">
+                <div className="mb-4 bg-white p-3 rounded-xl shadow-sm border border-black/5 text-center text-[10px] font-bold tracking-widest text-gray-500 uppercase group-hover:shadow-xl transition">
                   {v.bottomDesc}
                 </div>
 
                 <div
-                  className={`w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br ${v.color} flex items-center justify-center text-white text-[9px] md:text-[10px] font-bold text-center shadow-lg transition duration-300 group-hover:scale-110`}
+                  className={`w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br ${v.color} flex items-center justify-center text-white text-[8px] md:text-[9px] font-black text-center shadow-2xl transition duration-500 group-hover:scale-110`}
                 >
                   {v.bottomLogo}
                 </div>

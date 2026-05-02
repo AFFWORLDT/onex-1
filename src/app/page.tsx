@@ -1,60 +1,46 @@
-
+import DrNittinHero from "@/component/DrNittinHero";
 import OneXEmpireHero from "@/pages/home/OneXEmpireHero";
 import VisionaryLeadership from "@/pages/about/VisionaryLeadership";
-import ProvenSuccess from "@/pages/about/ProvenSuccess";
-import VerticalsTimeline from "@/pages/about/VerticalsTimeline";
-import GlobalReach from "@/pages/verticals/GlobalReach";
-import OnexDevelopment from "@/pages/verticals/OnexDevelopment";
-import WhyOnexDevelopments from "@/pages/verticals/WhyOnexDevelopments";
-import ProjectsInCanada from "@/pages/verticals/ProjectsInCanada"
-import ProjectsInIndia from "@/pages/verticals/ProjectsInIndia";
-import ProjectUAE from "@/pages/verticals/ProjectUAE";
-import OneXPresentation from "@/pages/projects/OneXPresentation";
-import  OneXCourses from "@/pages/projects/OneXCourses";
-import OneXPropertiesHero from "@/pages/projects/OneXPropertiesHero";
-import AboutOnex from "@/pages/projects/AboutOnex";
-import PeopleSection from "@/pages/projects/PeopleSection";
-import OnexEntertainment from "@/pages/projects/OnexEntertainment";
-import RealEstateServiceSlide from "@/pages/academy/RealEstateServiceSlide";
-import AnalysisServices from "@/pages/academy/AnalysisServices";
-import VocaTechSlide from "@/pages/academy/VocaTechSlide";
-import VocatechAbout from "@/pages/properties/VocatechAbout";
-import SevenSeasHero from "@/pages/properties/SevenSeasHero";
-import HotelShowcase from "@/pages/properties/HotelShowcase";
-import RealEstateTokenization from "@/pages/services/RealEstateTokenization";
-import BPTXMarketplace from "@/pages/services/BPTXMarketplace"
-import HomeXSlide from "@/pages/services/HomeXSlide";
-import OneXFoundation from "@/pages/foundation/OneXFoundation";
-import CSRShowcase from "@/pages/foundation/CSRShowcase";
-import SocialAwardsSection from "@/pages/foundation/SocialAwardsSection";
-import AwardsGrid from "@/pages/contact/AwardsGrid";
-import KeyHighlights from "@/pages/contact/KeyHighlights";
-
-
-
+import GlobalImpact from "@/component/GlobalImpact";
+import ContactSection from "@/component/ContactSection";
+import Footer from "@/component/Footer";
+import VenturesGrid from "@/component/VenturesGrid";
+import CurrentPresence from "@/component/CurrentPresence";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 export default function Home() {
- 
-
-
   return (
-   <>
-   
-    <main>
+    <main className="bg-[#050505] text-white">
+      {/* 1. HERO SECTION */}
       <section id="home">
-       <OneXEmpireHero/>
-        <VisionaryLeadership/>
-        <ProvenSuccess/>
-        <VerticalsTimeline/>
-        
+        <DrNittinHero />
+        <OneXEmpireHero />
       </section>
-    
-<section id="contact">
-  <AwardsGrid/>
-  <KeyHighlights/>
-   <OneXEmpireHero/>
-</section>
+
+      {/* 2. ABOUT TEASER */}
+      <section id="about" className="relative">
+        <VisionaryLeadership />
+        <div className="container mx-auto px-6 pb-20 flex justify-center">
+          <Link 
+            href="/about" 
+            className="group flex items-center gap-3 bg-white/5 border border-white/10 px-10 py-5 rounded-full font-bold hover:bg-gold hover:text-black transition-all"
+          >
+            READ FULL BIOGRAPHY <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
+          </Link>
+        </div>
+      </section>
+
+      {/* 3. VENTURES HUB (The Core of the Multi-page Structure) */}
+      <VenturesGrid />
+
+      {/* 3.5 CURRENT PRESENCE */}
+      <CurrentPresence />
+
+      {/* 4. CONTACT TEASER */}
+      <section id="contact">
+        <ContactSection />
+      </section>
     </main>
-   </>
   );
 }
